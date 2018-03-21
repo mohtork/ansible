@@ -3,13 +3,9 @@
 -
 
   # Target: where our play will run and options it will run with
-  hosts: centos
-  user : centos
+  hosts: centos #
   become: true
-  become_method: sudo
-  become_user: root
-  gather_facts: false
-
+  
   vars:
     pcre_version: pcre-8.40
     pcre_tarball_url: "https://ftp.pcre.org/pub/pcre/{{ pcre_version }}.tar.gz"
