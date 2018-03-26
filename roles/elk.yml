@@ -1,7 +1,0 @@
----
-- hosts: elk-dev
-  become: yes
-  roles:
-    - elasticsearch
-    - kibana
-    - logstash
