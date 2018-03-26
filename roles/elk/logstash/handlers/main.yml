@@ -1,0 +1,8 @@
+- name: Enable LOGSTASH
+  systemd:
+    name: logstash
+    enabled: yes
+- name: Restart LOGSTASH
+  systemd:
+    name: logstash
+    state: restarted

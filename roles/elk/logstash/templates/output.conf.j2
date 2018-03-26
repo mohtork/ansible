@@ -1,0 +1,20 @@
+output {
+  if [type] == "logs" {
+    elasticsearch {
+      hosts => ["{{ _es_host }}:{{ _es_port }}"]
+      index => "logs-%{+YYYY.MM.dd}"
+    }
+  }
+
+  else {
+    elasticsearch {
+      hosts => ["{{ _es_host }}:{{ _es_port }}"]
+      sniffing => true
+      manage_template => false
+      index => "logstash-%{+YYYY.MM.dd}"
+      document_type => "%{[@metadata][type]}"
+    }
+  }
+}
+
+
