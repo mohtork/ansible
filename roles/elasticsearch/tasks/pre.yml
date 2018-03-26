@@ -1,0 +1,13 @@
+---
+- name: Update the system
+  yum:
+    name: '*'
+    state: latest
+
+- name: Installing  Dependencies
+  yum:
+    name: "{{ item }}" 
+    update_cache: yes
+  with_items:
+    - epel-release
+    - java

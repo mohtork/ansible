@@ -1,0 +1,9 @@
+- name: Restart KIBANA
+  systemd:
+    name: kibana
+    enabled: yes
+    state: restarted
+- name: Restart NGINX
+  systemd:
+    name: nginx
+    state: restarted

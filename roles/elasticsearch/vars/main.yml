@@ -1,0 +1,5 @@
+---
+#Elasticsearch Variables
+es_config_path: /etc/elasticsearch/elasticsearch.yml
+_name: production
+_port: 9200

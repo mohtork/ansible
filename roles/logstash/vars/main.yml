@@ -1,0 +1,16 @@
+---
+#Logstash Variables
+logstash_config_path: /etc/logstash/logstash.yml
+data: /var/lib/logstash
+logs: /var/log/logstash
+_config: /etc/logstash/conf.d/
+_config_input: /etc/logstash/conf.d/input.conf
+_config_output: /etc/logstash/conf.d/output.conf
+_es_host: localhost
+_es_port: 9200
+
+# SSL Cerificates
+ssl_certificate_path: /etc/pki/tls/certs/
+ssl_key_path: /etc/pki/tls/private/
+_ssl_certificate: logstash-forwarder.crt
+_ssl_key: logstash-forwarder.key 
