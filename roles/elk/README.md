@@ -10,7 +10,7 @@ Ansible Playbook for setting up the ELK Stack on remote hosts
      * Create username and password to access Kibana
     
 ## What is next?
-   - Generates SSL certificates for Filebeat or Logstash-forwarder
+   - Generates SSL certificates for Filebeat
    - Install and configure Filebeat
    - Configure Logstash filters for nginx , aws services
    
