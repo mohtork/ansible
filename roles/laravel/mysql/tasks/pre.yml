@@ -1,9 +1,9 @@
-- name: Download MySQL 5.7 repo rpm
+- name: Download MySQL 5.6 repo rpm
   get_url:
     url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
     dest: /tmp
 
-- name: Install MySQL 5.7 repo
+- name: Install MySQL 5.6 repo
   yum:
     name: /tmp/mysql-community-release-el7-5.noarch.rpm
     state: latest
