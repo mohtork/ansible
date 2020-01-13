@@ -1,0 +1,82 @@
+---
+- name: Include pre packages
+  import_tasks: pre.yml
+
+- name: Install MySQL 5.7
+  yum:
+    name:
+      - mysql-server
+      - mysql
+    state: latest
+
+- name: Add my.cnf file
+  template:
+    src: ../templates/my.cnf.yml.j2
+    dest: /etc/my.cnf
+    owner: mysql
+    group: mysql
+    mode: 0640
+  notify:
+    - restart mysql
+
+- name: Force all notified handlers to run at this point 
+  meta: flush_handlers
+
+- name: Adds Python MySQL support on RedHat/CentOS
+  yum: 
+    name: MySQL-python
+    state: latest
+
+- name: Set the root password 
+  mysql_user: 
+    login_user: root
+    login_password:  
+    user: root
+    password: "{{ root_password }}"
+
+- name: Secure the root user for IPV6 localhost (::1)
+  mysql_user: 
+    login_user: root
+    login_password: "{{ root_password }}"
+    user: root
+    password: "{{ root_password }}" 
+    host: "::1"
+
+- name: Secure the root user for IPV4 localhost (127.0.0.1)
+  mysql_user:
+    login_user: root
+    login_password: "{{ root_password }}"
+    user: root
+    password: "{{ root_password }}"
+    host: "127.0.0.1"
+
+- name: Secure the root user for localhost domain
+  mysql_user:
+    login_user: root
+    login_password: "{{ root_password }}"
+    user: root
+    password: "{{ root_password }}"
+    host: "localhost"
+
+- name: Secure the root user for server_hostname domain
+  mysql_user:
+    login_user: root
+    login_password: "{{ root_password }}"
+    user: root
+    password: "{{ root_password }}"
+    host: "{{ ansible_fqdn }}"
+
+- name: Deletes anonymous server user
+  mysql_user:
+    login_user: root
+    login_password: "{{ root_password }}"
+    user: ""
+    host_all: yes
+    state: absent
+
+- name: Removes the test database
+  mysql_db:
+    login_user: root
+    login_password: "{{ root_password }}"
+    db: test
+    state: absent

@@ -1,0 +1,11 @@
+- name: start nginx
+  systemd:
+    name: nginx
+    enabled: yes
+    state: started
+
+- name: start php-fpm
+  systemd:
+    name: php-fpm
+    enabled: yes
+    state: started

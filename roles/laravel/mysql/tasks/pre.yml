@@ -1,0 +1,15 @@
+- name: Download MySQL 5.7 repo rpm
+  get_url:
+    url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+    dest: /tmp
+
+- name: Install MySQL 5.7 repo
+  yum:
+    name: /tmp/mysql-community-release-el7-5.noarch.rpm
+    state: latest
+
+- name: Update all packages on the system except the kernel
+  yum:
+    name: '*'
+    state: latest
+    exclude: kernel
