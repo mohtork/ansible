@@ -50,5 +50,6 @@
   template:
     src: ../templates/domain-conf.yml.j2
     dest: /etc/nginx/conf.d/{{ domain }}.conf
-  notify:
-    - start nginx
+
+- name: Include phpmyadmin tasks
+  import_tasks: phpmyadmin.yml

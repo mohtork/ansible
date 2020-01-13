@@ -1,0 +1,18 @@
+location /phpMyAdmin {
+       root /usr/share/;
+       index index.php index.html index.htm;
+       location ~ ^/phpMyAdmin/(.+\.php)$ {
+               try_files $uri =404;
+               root /usr/share/;
+               fastcgi_pass /run/php-fpm/php-fpm.sock;
+               fastcgi_index index.php;
+               fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+               include /etc/nginx/fastcgi_params;
+       }
+       location ~* ^/phpMyAdmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+               root /usr/share/;
+       }
+}
+location /phpmyadmin {
+    rewrite ^/* /phpMyAdmin last;
+}

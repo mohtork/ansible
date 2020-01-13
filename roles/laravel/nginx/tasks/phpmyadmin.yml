@@ -1,0 +1,36 @@
+---
+- name: Install PhpMyAdmin
+  yum:
+    name: phpmyadmin
+    state: latest
+    enablerepo: "remi-php73"
+
+- name: Change group ownership of /etc/phpMyAdmin
+  file:
+    path: /etc/phpMyAdmin
+    state: directory
+    recurse: yes
+    group: "{{ nginx_user }}"
+
+- name: Create the snippets directory
+  file:
+    path: /etc/nginx/snippets
+    state: directory
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_user }}"
+
+- name: Change group ownership of /var/lib/php/session/
+  file:
+    path: /etc/phpMyAdmin
+    state: directory
+    recurse: yes
+    group: "{{ nginx_user }}"
+
+- name: Add phpmyadmin nginx configuration
+  template:
+    src: ../templates/phpmyadmin.yml.j2
+    dest: /etc/nginx/snippets/phpMyAdmin.conf
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_user }}"
+  notify:
+    - start nginx  
