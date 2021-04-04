@@ -1,0 +1,23 @@
+- name: Install nginx
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: Add epel-release repo
+    yum:
+      name: epel-release
+      state: present
+
+  - name: Install nginx
+    yum:
+      name: nginx
+      state: present
+
+  - name: Modify index.html page
+    shell: echo "nginx installed via ansible" > /usr/share/nginx/html/index.html
+
+  - name: Start nginx
+    systemd:
+      name: nginx
+      state: started
+      enabled: yes
