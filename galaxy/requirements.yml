@@ -1,4 +1,2 @@
-- hosts: all
-  gather_facts: true
-  roles:
-    - java
+- src: https://github.com/geerlingguy/ansible-role-java
+  name: java
