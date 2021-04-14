@@ -1,2 +1,5 @@
 - src: https://github.com/geerlingguy/ansible-role-java
   name: java
+  
+- src: https://github.com/nginxinc/ansible-role-nginx
+  name: nginx
