@@ -1,5 +1,11 @@
-- src: https://github.com/geerlingguy/ansible-role-java
-  name: java
+- src: https://github.com/geerlingguy/ansible-role-mysql
+  name: geerlingguy.mysql
   
-- src: https://github.com/nginxinc/ansible-role-nginx
-  name: nginx
+- src: https://github.com/geerlingguy/ansible-role-apache
+  name: geerlingguy.apache
+  
+- src: https://github.com/geerlingguy/ansible-role-php
+  name: geerlingguy.php
+  
+- src: https://github.com/geerlingguy/ansible-role-php-mysql
+  name: geerlingguy.php-mysql
