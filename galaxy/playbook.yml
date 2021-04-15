@@ -1,5 +1,6 @@
 - hosts: all
-  gather_facts: true
   roles:
-    - java
-    - nginx
+  - geerlingguy.mysql
+  - geerlingguy.apache
+  - geerlingguy.php
+  - geerlingguy.php-mysql
