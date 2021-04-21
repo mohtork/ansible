@@ -3,3 +3,6 @@
   
 - src: https://github.com/geerlingguy/ansible-role-memcached.git
   name: memcached
+  
+- src: https://github.com/enix/ansible-mongodb.git
+  name: mongodb
