@@ -31,7 +31,9 @@
   modprobe:
     name: "{{ item }}"
     state: present
-  with_items: "{{ modules_to_load }}"
+  with_items:
+    - overlay
+    - br_netfilter
 
 - name: set net.bridge.bridge-nf-call-iptables in /etc/sysctl.conf
   sysctl:
@@ -99,7 +101,7 @@
     
 - name: Install kubelet
   apt:
-    name: kubectl={{ kubelet_version }}
+    name: kubectl
     state: present
     allow_unauthenticated: yes
 
