@@ -23,7 +23,7 @@
 - name: Copy admin.conf to Home directory
   when: init_cluster is succeeded
   copy:
-    src: "{{ kubeadmin_config }}"
+    src: /etc/kubernetes/admin.conf
     dest: ".kube/config"
     owner: "{{ ansible_user | default(ansible_user_id) }}"
     group: "{{ ansible_user | default(ansible_user_id) }}"
