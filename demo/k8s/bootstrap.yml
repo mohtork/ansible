@@ -100,7 +100,7 @@
 
 - name: Createing /etc/default/kubelet
   copy:
-    src: "./files/kubelet"
+    src: "./kubelet"
     dest: "/etc/default/kubelet"
     
 - name: Install kubelet
