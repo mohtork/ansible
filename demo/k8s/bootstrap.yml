@@ -91,8 +91,12 @@
   apt:
     name: cri-o-runc
     state: present
-  notify:
-    - start crio
+    
+- name: start crio
+  systemd:
+    name: crio
+    enabled: yes
+    state: started
 
 - name: Createing /etc/default/kubelet
   copy:
