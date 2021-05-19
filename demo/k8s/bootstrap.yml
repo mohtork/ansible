@@ -1,6 +1,3 @@
-- name: Disable SWAP
-  command: swapoff -a
-  
 - name: Add k8s signing key
   apt_key:
     url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
