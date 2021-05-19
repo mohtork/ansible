@@ -1,0 +1,113 @@
+- name: Disable SWAP
+  command: swapoff -a
+  
+- name: Add k8s signing key
+  apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    state: present
+
+- name: Add k8s repository
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    filename: kubernetes
+    update_cache: yes
+
+- name: Update system
+  apt:
+    name: "*"
+    state: latest
+
+- name: Install kubeadm
+  apt:
+    name: kubeadm
+    state: present
+    allow_unauthenticated: yes
+
+- name: Install kubectl
+  apt:
+    name: kubectl
+    state: present
+    allow_unauthenticated: yes
+
+- name: Load needed modules for CRI-O
+  modprobe:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ modules_to_load }}"
+
+- name: set net.bridge.bridge-nf-call-iptables in /etc/sysctl.conf
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: "1"
+    state: present
+
+- name: set net.ipv4.ip_forward in /etc/sysctl.conf
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    state: present
+
+- name: set net.bridge.bridge-nf-call-ip6tables in /etc/sysctl.conf
+  sysctl:
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: "1"
+    state: present
+
+- name: Add cri-o signing key 1
+  apt_key:
+    url: "https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:1.18/xUbuntu_20.04/Release.key"
+    state: present
+
+- name: Add cri-o signing key 2
+  apt_key:
+    url: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/Release.key"
+    state: present
+
+- name: Add CRI-O repository 1
+  apt_repository:
+    repo: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_20.04/ /"
+    state: present
+    filename: devel:kubic:libcontainers:stable
+    update_cache: yes
+
+- name: Add CRI-O repository 2
+  apt_repository:
+    repo: "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/1.18/xUbuntu_20.04/ /"
+    state: present
+    filename: devel:kubic:libcontainers:stable:cri-o:1.18
+    update_cache: yes
+
+- name: Update system
+  apt:
+    name: "*"
+    state: latest
+
+- name: Install cri-o
+  apt:
+    name: cri-o
+    state: present
+
+- name: Install cri-o-runc
+  apt:
+    name: cri-o-runc
+    state: present
+  notify:
+    - start crio
+
+- name: Createing /etc/default/kubelet
+  copy:
+    src: "./files/kubelet"
+    dest: "/etc/default/kubelet"
+    
+- name: Install kubelet
+  apt:
+    name: kubectl={{ kubelet_version }}
+    state: present
+    allow_unauthenticated: yes
+
+- name: Install kubernetes-cni
+  apt:
+    name: kubernetes-cni
+    state: present
+    allow_unauthenticated: yes
