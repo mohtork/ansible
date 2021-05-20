@@ -7,7 +7,7 @@
   shell: |
     kubeadm join --token "{{ lookup('cypher','secret=secret/K8S_TOKEN') }}" \
                 --discovery-token-unsafe-skip-ca-verification \
-                {{ ansible_env.PATH}}:6443
+                {{ ansible_env.KUBE_IP}}:6443
   register: join_cluster
   # See: https://github.com/jetstack/cert-manager/issues/2640 with using kubeadm + calico + cert-manager
   environment:
