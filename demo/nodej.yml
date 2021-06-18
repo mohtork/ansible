@@ -8,8 +8,12 @@
   roles:
   - nodejs
   tasks:
+    - name: create app directory
+      file:
+        path: /app
+        state: directory
     - name: clone chat app
       git:
         repo: https://github.com/cxteamdemo/anonymouse-realtime-chat-app.git
-        dest: ~
+        dest: /app
       
