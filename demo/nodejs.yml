@@ -17,6 +17,6 @@
         repo: https://github.com/cxteamdemo/anonymouse-realtime-chat-app.git
         dest: /app
     - name: start chat app
-      command: "cd /app && npm install && npm start"
+      command: "npm install && npm start"
       args:
         chdir: "/app"
