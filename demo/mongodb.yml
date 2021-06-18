@@ -10,5 +10,5 @@
   roles:
   - mongo
   tasks:
-    - name: create mongodb task
+    - name: create mongodb database
       shell: mongo mydb --eval "db.createCollection('chat')"
