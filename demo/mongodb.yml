@@ -9,3 +9,6 @@
     mongodb_storage_dirperdb: false # Use one directory per DB
   roles:
   - mongo
+  tasks:
+    - name: create mongodb task
+      shell: mongo mydb --eval "db.createCollection('chat')"
