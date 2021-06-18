@@ -6,3 +6,6 @@
   
 - src: https://github.com/enix/ansible-mongodb.git
   name: mongodb
+  
+- src: https://github.com/UnderGreen/ansible-role-mongodb.git
+  name: mongo
