@@ -9,7 +9,8 @@
                  --kubernetes-version v1.21.0 \
                  --pod-network-cidr 10.244.0.0/16 \
                  --token "{{ lookup('cypher','secret=secret/K8S_TOKEN') }}" \
-                 --apiserver-advertise-address {{ ansible_eth0.ipv4.address }}
+                 --apiserver-advertise-address {{ ansible_eth0.ipv4.address }} \
+                 --upload-certs
   register: init_cluster
   # See: https://github.com/jetstack/cert-manager/issues/2640 with using kubeadm + calico + cert-manager
   environment:
