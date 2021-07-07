@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+    - include: bootstrap.yml
+    - include: join_master.yml
